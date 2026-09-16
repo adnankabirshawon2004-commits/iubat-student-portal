@@ -2,359 +2,372 @@
 
 import { useState } from "react";
 
-export default function AdminPage() {
-  const [active, setActive] = useState("Dashboard");
+const menuItems = [
+  { label: "Overview", icon: "⌂" },
+  { label: "Notices", icon: "▤" },
+  { label: "Students", icon: "♙" },
+  { label: "Courses", icon: "▦" },
+  { label: "Settings", icon: "⚙" },
+];
 
-  const menu = [
-    { name: "Dashboard", icon: "▦" },
-    { name: "Notices", icon: "◈" },
-    { name: "Students", icon: "♙" },
-    { name: "Courses", icon: "▤" },
-    { name: "Settings", icon: "⚙" },
-  ];
+export default function AdminPage() {
+  const [active, setActive] = useState("Overview");
 
   return (
-    <div className="min-h-screen bg-[#f5f7fb] text-slate-900">
-      <div className="flex min-h-screen">
+    <div className="min-h-screen bg-[#f8f9fb] text-[#20242a]">
 
-        {/* SIDEBAR */}
-        <aside className="hidden w-[260px] shrink-0 border-r border-slate-200 bg-white lg:flex lg:flex-col">
+      {/* DESKTOP SIDEBAR */}
+      <aside className="fixed inset-y-0 left-0 hidden w-[245px] border-r border-[#e8eaed] bg-white lg:flex lg:flex-col">
 
-          {/* Logo */}
-          <div className="flex h-[82px] items-center border-b border-slate-100 px-7">
-            <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#164e63] text-xl font-bold text-white shadow-lg shadow-cyan-900/10">
-                I
+        {/* Brand */}
+        <div className="flex h-[78px] items-center border-b border-[#eeeeee] px-6">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#20242a] text-lg font-bold text-white">
+              I
+            </div>
+
+            <div>
+              <div className="text-[16px] font-bold tracking-tight">
+                IUBAT
               </div>
 
-              <div>
-                <h1 className="text-[17px] font-bold tracking-tight">
-                  IUBAT
-                </h1>
-                <p className="text-[11px] font-medium text-slate-400">
-                  STUDENT PORTAL
-                </p>
+              <div className="text-[9px] font-semibold tracking-[0.16em] text-gray-400">
+                STUDENT PORTAL
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Navigation */}
-          <div className="flex-1 px-4 py-7">
+        {/* Navigation */}
+        <div className="flex-1 px-4 py-7">
 
-            <p className="px-3 pb-3 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">
-              Main Menu
-            </p>
+          <p className="mb-3 px-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+            Workspace
+          </p>
 
-            <nav className="space-y-1">
-              {menu.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => setActive(item.name)}
-                  className={`group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-all ${
-                    active === item.name
-                      ? "bg-[#164e63] text-white shadow-md shadow-cyan-900/10"
-                      : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-                  }`}
-                >
-                  <span className="flex w-6 justify-center text-lg">
-                    {item.icon}
-                  </span>
-
-                  {item.name}
-                </button>
-              ))}
-            </nav>
-
-            <p className="px-3 pb-3 pt-9 text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400">
-              Quick Access
-            </p>
-
-            <nav className="space-y-1">
-              <a
-                href="/"
-                className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-slate-500 transition hover:bg-slate-50 hover:text-slate-900"
+          <div className="space-y-1">
+            {menuItems.map((item) => (
+              <button
+                key={item.label}
+                onClick={() => setActive(item.label)}
+                className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
+                  active === item.label
+                    ? "bg-[#f0f1f3] font-semibold text-[#20242a]"
+                    : "text-gray-500 hover:bg-[#f7f7f8] hover:text-gray-900"
+                }`}
               >
-                <span className="flex w-6 justify-center text-lg">⌂</span>
-                Student Portal
-              </a>
-            </nav>
+                <span className="flex w-6 justify-center text-[16px]">
+                  {item.icon}
+                </span>
+
+                {item.label}
+              </button>
+            ))}
           </div>
 
-          {/* Bottom admin */}
-          <div className="border-t border-slate-100 p-4">
-            <div className="flex items-center gap-3 rounded-xl bg-slate-50 p-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#164e63] text-sm font-bold text-white">
+          <p className="mb-3 mt-9 px-3 text-[10px] font-semibold uppercase tracking-[0.14em] text-gray-400">
+            Portal
+          </p>
+
+          <a
+            href="/"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-500 transition hover:bg-[#f7f7f8] hover:text-gray-900"
+          >
+            <span className="flex w-6 justify-center text-[16px]">
+              ↗
+            </span>
+
+            Student Portal
+          </a>
+        </div>
+
+        {/* Admin */}
+        <div className="border-t border-[#eeeeee] p-4">
+          <div className="flex items-center gap-3 rounded-xl bg-[#f7f7f8] p-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#20242a] text-xs font-bold text-white">
+              A
+            </div>
+
+            <div className="min-w-0">
+              <p className="truncate text-xs font-semibold">
+                Administrator
+              </p>
+
+              <p className="mt-0.5 text-[10px] text-gray-400">
+                Portal Admin
+              </p>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* MAIN */}
+      <div className="lg:pl-[245px]">
+
+        {/* HEADER */}
+        <header className="sticky top-0 z-30 flex h-[78px] items-center justify-between border-b border-[#e8eaed] bg-white/95 px-5 backdrop-blur md:px-8">
+
+          <div>
+            <p className="text-[11px] font-medium text-gray-400">
+              Administration
+            </p>
+
+            <h1 className="mt-0.5 text-lg font-bold tracking-tight">
+              {active}
+            </h1>
+          </div>
+
+          <div className="flex items-center gap-3">
+
+            <button className="relative flex h-9 w-9 items-center justify-center rounded-lg border border-[#e5e7eb] bg-white text-sm text-gray-500 hover:bg-gray-50">
+              ♢
+              <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-red-500" />
+            </button>
+
+            <div className="hidden h-8 w-px bg-gray-200 sm:block" />
+
+            <div className="flex items-center gap-2">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#20242a] text-xs font-bold text-white">
                 A
               </div>
 
-              <div className="min-w-0">
-                <p className="truncate text-sm font-semibold">
+              <div className="hidden sm:block">
+                <p className="text-xs font-semibold">
+                  Admin
+                </p>
+
+                <p className="text-[10px] text-gray-400">
                   Administrator
                 </p>
-                <p className="text-[11px] text-slate-400">
-                  Portal Admin
-                </p>
               </div>
             </div>
+
           </div>
-        </aside>
+        </header>
 
-        {/* MAIN */}
-        <main className="min-w-0 flex-1">
+        {/* CONTENT */}
+        <main className="mx-auto max-w-[1450px] p-5 md:p-8 xl:p-10">
 
-          {/* TOP BAR */}
-          <header className="sticky top-0 z-20 flex h-[82px] items-center justify-between border-b border-slate-200 bg-white/90 px-5 backdrop-blur md:px-8">
+          {/* TOP */}
+          <section className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
 
             <div>
-              <p className="text-xs font-medium text-slate-400">
-                IUBAT Student Portal
+              <p className="text-sm text-gray-400">
+                Good morning, Administrator
               </p>
 
-              <h2 className="text-xl font-bold tracking-tight">
-                Administration
+              <h2 className="mt-1 text-3xl font-bold tracking-[-0.03em]">
+                Portal Overview
               </h2>
+
+              <p className="mt-2 max-w-xl text-sm leading-6 text-gray-500">
+                Manage notices, students and important information
+                for the IUBAT Student Portal.
+              </p>
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
 
-              <button className="relative flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition hover:bg-slate-50">
-                🔔
-
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
+              <button className="rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-xs font-semibold text-gray-600 shadow-sm transition hover:bg-gray-50">
+                View Portal
               </button>
 
-              <div className="hidden items-center gap-3 border-l border-slate-200 pl-4 sm:flex">
-                <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#164e63] text-sm font-bold text-white">
-                  A
-                </div>
+              <button
+                onClick={() => setActive("Notices")}
+                className="rounded-lg bg-[#20242a] px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-black"
+              >
+                + New Notice
+              </button>
+
+            </div>
+          </section>
+
+          {/* STATISTICS */}
+          <section className="mt-9 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+
+            <DashboardCard
+              title="Total Notices"
+              value="0"
+              subtitle="Published on portal"
+              icon="▤"
+            />
+
+            <DashboardCard
+              title="Pinned Notices"
+              value="0"
+              subtitle="Currently highlighted"
+              icon="⌖"
+            />
+
+            <DashboardCard
+              title="Students"
+              value="—"
+              subtitle="Registered accounts"
+              icon="♙"
+            />
+
+            <DashboardCard
+              title="System Status"
+              value="Online"
+              subtitle="Everything operational"
+              icon="✓"
+              status
+            />
+
+          </section>
+
+          {/* MAIN GRID */}
+          <section className="mt-6 grid gap-5 xl:grid-cols-[1.65fr_1fr]">
+
+            {/* ACTIVITY */}
+            <div className="rounded-2xl border border-[#e7e9ec] bg-white">
+
+              <div className="flex items-center justify-between border-b border-[#eeeeee] px-6 py-5">
 
                 <div>
-                  <p className="text-sm font-semibold">
-                    Admin
-                  </p>
+                  <h3 className="text-sm font-bold">
+                    Recent Activity
+                  </h3>
 
-                  <p className="text-[11px] text-slate-400">
-                    Administrator
+                  <p className="mt-1 text-xs text-gray-400">
+                    Latest changes made in the portal
                   </p>
                 </div>
+
+                <button className="text-xs font-semibold text-gray-500 hover:text-gray-900">
+                  View all →
+                </button>
+
+              </div>
+
+              <div className="min-h-[310px]">
+
+                <div className="flex h-[310px] flex-col items-center justify-center text-center">
+
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#f5f6f7] text-xl text-gray-400">
+                    ◷
+                  </div>
+
+                  <h4 className="mt-4 text-sm font-semibold">
+                    No activity yet
+                  </h4>
+
+                  <p className="mt-1 max-w-xs text-xs leading-5 text-gray-400">
+                    Your recent administrative actions will appear
+                    here.
+                  </p>
+
+                </div>
+
+              </div>
+            </div>
+
+            {/* QUICK ACTIONS */}
+            <div className="rounded-2xl border border-[#e7e9ec] bg-white">
+
+              <div className="border-b border-[#eeeeee] px-6 py-5">
+
+                <h3 className="text-sm font-bold">
+                  Quick Actions
+                </h3>
+
+                <p className="mt-1 text-xs text-gray-400">
+                  Common administrative tasks
+                </p>
+
+              </div>
+
+              <div className="space-y-2 p-4">
+
+                <Action
+                  icon="▤"
+                  title="Manage Notices"
+                  description="Create or edit announcements"
+                  onClick={() => setActive("Notices")}
+                />
+
+                <Action
+                  icon="♙"
+                  title="Students"
+                  description="Manage student accounts"
+                  onClick={() => setActive("Students")}
+                />
+
+                <Action
+                  icon="▦"
+                  title="Courses"
+                  description="View course information"
+                  onClick={() => setActive("Courses")}
+                />
+
+                <Action
+                  icon="⚙"
+                  title="Settings"
+                  description="Configure portal"
+                  onClick={() => setActive("Settings")}
+                />
+
+              </div>
+            </div>
+
+          </section>
+
+          {/* SYSTEM INFORMATION */}
+          <section className="mt-5 rounded-2xl border border-[#e7e9ec] bg-white">
+
+            <div className="flex flex-col justify-between gap-4 px-6 py-5 sm:flex-row sm:items-center">
+
+              <div>
+                <h3 className="text-sm font-bold">
+                  Portal Information
+                </h3>
+
+                <p className="mt-1 text-xs text-gray-400">
+                  Current system information
+                </p>
+              </div>
+
+              <div className="flex items-center gap-2 rounded-full bg-[#f0fdf4] px-3 py-1.5">
+                <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+                <span className="text-[11px] font-semibold text-green-700">
+                  All systems operational
+                </span>
               </div>
 
             </div>
-          </header>
 
-          {/* CONTENT */}
-          <div className="p-5 md:p-8 lg:p-10">
+            <div className="grid border-t border-[#eeeeee] sm:grid-cols-3">
 
-            {/* Welcome */}
-            <section className="mb-8 overflow-hidden rounded-3xl bg-gradient-to-r from-[#164e63] via-[#155e75] to-[#0e7490] p-7 text-white shadow-xl shadow-cyan-900/10 md:p-9">
-
-              <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
-
-                <div>
-                  <p className="mb-2 text-sm font-medium text-cyan-100">
-                    Welcome back, Administrator
-                  </p>
-
-                  <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
-                    Dashboard Overview
-                  </h1>
-
-                  <p className="mt-2 max-w-xl text-sm leading-6 text-cyan-100">
-                    Manage the IUBAT Student Portal, publish notices and
-                    monitor important portal information from one place.
-                  </p>
-                </div>
-
-                <div className="hidden h-24 w-24 items-center justify-center rounded-3xl bg-white/10 text-5xl backdrop-blur-sm md:flex">
-                  📊
-                </div>
-
-              </div>
-            </section>
-
-            {/* STAT CARDS */}
-            <section className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-
-              <StatCard
-                title="Total Notices"
-                value="0"
-                description="Published notices"
-                icon="📢"
+              <InfoItem
+                title="Portal"
+                value="IUBAT Student Portal"
               />
 
-              <StatCard
-                title="Pinned Notices"
-                value="0"
-                description="Important notices"
-                icon="📌"
+              <InfoItem
+                title="Environment"
+                value="Production"
               />
 
-              <StatCard
-                title="Students"
-                value="—"
-                description="Registered students"
-                icon="🎓"
+              <InfoItem
+                title="Status"
+                value="Operational"
               />
 
-              <StatCard
-                title="Portal Status"
-                value="Online"
-                description="System operational"
-                icon="✓"
-                green
-              />
+            </div>
 
-            </section>
+          </section>
 
-            {/* LOWER GRID */}
-            <section className="mt-7 grid gap-6 xl:grid-cols-[1.5fr_1fr]">
+          {/* FOOTER */}
+          <footer className="mt-8 flex flex-col justify-between gap-2 border-t border-[#e5e7eb] pt-5 text-[11px] text-gray-400 sm:flex-row">
+            <span>
+              © 2026 IUBAT Student Portal
+            </span>
 
-              {/* Recent Activity */}
-              <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+            <span>
+              Administration Dashboard
+            </span>
+          </footer>
 
-                <div className="flex items-center justify-between border-b border-slate-100 px-6 py-5">
-
-                  <div>
-                    <h3 className="font-bold">
-                      Recent Activity
-                    </h3>
-
-                    <p className="mt-1 text-xs text-slate-400">
-                      Latest portal activity
-                    </p>
-                  </div>
-
-                  <button className="rounded-lg bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500 transition hover:bg-slate-100">
-                    View All
-                  </button>
-
-                </div>
-
-                <div className="p-6">
-
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
-
-                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-slate-50 text-2xl">
-                      🕐
-                    </div>
-
-                    <h4 className="font-semibold text-slate-700">
-                      No recent activity
-                    </h4>
-
-                    <p className="mt-1 max-w-xs text-xs leading-5 text-slate-400">
-                      Admin activities will appear here when you start
-                      managing the portal.
-                    </p>
-
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Quick Actions */}
-              <div className="rounded-2xl border border-slate-200 bg-white shadow-sm">
-
-                <div className="border-b border-slate-100 px-6 py-5">
-
-                  <h3 className="font-bold">
-                    Quick Actions
-                  </h3>
-
-                  <p className="mt-1 text-xs text-slate-400">
-                    Frequently used tools
-                  </p>
-
-                </div>
-
-                <div className="space-y-3 p-5">
-
-                  <button
-                    onClick={() => setActive("Notices")}
-                    className="flex w-full items-center gap-4 rounded-xl border border-slate-100 p-4 text-left transition hover:border-cyan-100 hover:bg-cyan-50"
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-50 text-xl">
-                      📢
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-semibold">
-                        Manage Notices
-                      </p>
-
-                      <p className="mt-1 text-xs text-slate-400">
-                        Create and manage portal notices
-                      </p>
-                    </div>
-
-                    <span className="ml-auto text-slate-300">
-                      →
-                    </span>
-                  </button>
-
-                  <button
-                    onClick={() => setActive("Students")}
-                    className="flex w-full items-center gap-4 rounded-xl border border-slate-100 p-4 text-left transition hover:border-blue-100 hover:bg-blue-50"
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-xl">
-                      🎓
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-semibold">
-                        Student Management
-                      </p>
-
-                      <p className="mt-1 text-xs text-slate-400">
-                        View portal students
-                      </p>
-                    </div>
-
-                    <span className="ml-auto text-slate-300">
-                      →
-                    </span>
-                  </button>
-
-                  <button
-                    onClick={() => setActive("Settings")}
-                    className="flex w-full items-center gap-4 rounded-xl border border-slate-100 p-4 text-left transition hover:border-purple-100 hover:bg-purple-50"
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-purple-50 text-xl">
-                      ⚙
-                    </div>
-
-                    <div>
-                      <p className="text-sm font-semibold">
-                        Portal Settings
-                      </p>
-
-                      <p className="mt-1 text-xs text-slate-400">
-                        Configure portal options
-                      </p>
-                    </div>
-
-                    <span className="ml-auto text-slate-300">
-                      →
-                    </span>
-                  </button>
-
-                </div>
-              </div>
-
-            </section>
-
-            {/* FOOTER */}
-            <footer className="mt-8 flex flex-col justify-between gap-2 border-t border-slate-200 pt-6 text-xs text-slate-400 sm:flex-row">
-              <p>
-                © 2026 IUBAT Student Portal
-              </p>
-
-              <p>
-                Administration Dashboard
-              </p>
-            </footer>
-
-          </div>
         </main>
       </div>
     </div>
@@ -362,49 +375,116 @@ export default function AdminPage() {
 }
 
 
-/* STAT CARD */
+/* DASHBOARD CARD */
 
-function StatCard({
+function DashboardCard({
   title,
   value,
-  description,
+  subtitle,
   icon,
-  green = false,
+  status = false,
 }: {
   title: string;
   value: string;
-  description: string;
+  subtitle: string;
   icon: string;
-  green?: boolean;
+  status?: boolean;
 }) {
   return (
-    <div className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md">
+    <div className="rounded-2xl border border-[#e7e9ec] bg-white p-5 transition hover:border-gray-300 hover:shadow-sm">
 
       <div className="flex items-start justify-between">
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">
+          <p className="text-xs font-medium text-gray-400">
             {title}
           </p>
 
           <p
             className={`mt-3 text-2xl font-bold tracking-tight ${
-              green ? "text-emerald-600" : "text-slate-900"
+              status ? "text-green-600" : "text-[#20242a]"
             }`}
           >
             {value}
           </p>
 
-          <p className="mt-1 text-xs text-slate-400">
-            {description}
+          <p className="mt-1 text-[11px] text-gray-400">
+            {subtitle}
           </p>
         </div>
 
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-slate-50 text-xl transition group-hover:scale-110">
+        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#f5f6f7] text-sm text-gray-500">
           {icon}
         </div>
 
       </div>
+    </div>
+  );
+}
+
+
+/* ACTION */
+
+function Action({
+  icon,
+  title,
+  description,
+  onClick,
+}: {
+  icon: string;
+  title: string;
+  description: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="group flex w-full items-center gap-3 rounded-xl p-3 text-left transition hover:bg-[#f7f7f8]"
+    >
+
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#f4f5f6] text-sm text-gray-500 transition group-hover:bg-white group-hover:shadow-sm">
+        {icon}
+      </div>
+
+      <div className="min-w-0 flex-1">
+
+        <p className="text-xs font-semibold">
+          {title}
+        </p>
+
+        <p className="mt-1 truncate text-[10px] text-gray-400">
+          {description}
+        </p>
+
+      </div>
+
+      <span className="text-xs text-gray-300 transition group-hover:text-gray-600">
+        →
+      </span>
+
+    </button>
+  );
+}
+
+
+/* INFO */
+
+function InfoItem({
+  title,
+  value,
+}: {
+  title: string;
+  value: string;
+}) {
+  return (
+    <div className="border-b border-[#eeeeee] px-6 py-5 last:border-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
+      <p className="text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+        {title}
+      </p>
+
+      <p className="mt-1.5 text-xs font-semibold text-gray-700">
+        {value}
+      </p>
     </div>
   );
 }
